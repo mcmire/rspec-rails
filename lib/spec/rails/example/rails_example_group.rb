@@ -11,7 +11,6 @@ module Spec
     module Example
       if ActiveSupport.const_defined?(:TestCase)
         class RailsExampleGroup < ActiveSupport::TestCase
-          include ActionController::Assertions::SelectorAssertions
         end
       else
         class RailsExampleGroup < Test::Unit::TestCase
@@ -25,5 +24,11 @@ module Spec
       end
       
     end
+  end
+end
+
+if ActiveSupport.const_defined?(:TestCase) && Object.const_defined?(:ActionController) && ActionController.const_defined?(:Base)
+  Spec::Rails::Example::RailsExampleGroup.class_eval do
+    include ActionController::Assertions::SelectorAssertions
   end
 end
