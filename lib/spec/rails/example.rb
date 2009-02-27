@@ -1,15 +1,23 @@
 dir = File.dirname(__FILE__)
 
-require 'spec/rails/example/assigns_hash_proxy'
+if Object.const_defined?(:ActionController) && ActionController.const_defined?(:Base)
+  require 'spec/rails/example/assigns_hash_proxy'
+end
 
-require "spec/rails/example/render_observer"
+if Object.const_defined?(:ActionController) && ActionController.const_defined?(:Base)
+  require "spec/rails/example/render_observer"
+end
 require "spec/rails/example/rails_example_group"
-require "spec/rails/example/model_example_group"
-require "spec/rails/example/functional_example_group"
-require "spec/rails/example/controller_example_group"
-require "spec/rails/example/helper_example_group"
-require "spec/rails/example/view_example_group"
-require "spec/rails/example/cookies_proxy"
+if Object.const_defined?(:ActiveRecord) && ActiveRecord.const_defined?(:Base)
+  require "spec/rails/example/model_example_group"
+end
+if Object.const_defined?(:ActionController) && ActionController.const_defined?(:Base)
+  require "spec/rails/example/functional_example_group"
+  require "spec/rails/example/controller_example_group"
+  require "spec/rails/example/helper_example_group"
+  require "spec/rails/example/view_example_group"
+  require "spec/rails/example/cookies_proxy"
+end
 
 module Spec
   module Rails

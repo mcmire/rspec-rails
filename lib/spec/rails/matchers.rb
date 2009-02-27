@@ -1,11 +1,19 @@
 dir = File.dirname(__FILE__)
-require 'spec/rails/matchers/ar_be_valid'
-require 'spec/rails/matchers/assert_select'
-require 'spec/rails/matchers/change'
+if Object.const_defined?(:ActiveRecord) && ActiveRecord.const_defined?(:Base)
+  require 'spec/rails/matchers/ar_be_valid'
+end
+if Object.const_defined?(:ActionController) && ActionController.const_defined?(:Base)
+  require 'spec/rails/matchers/assert_select'
+end
+if Object.const_defined?(:ActiveRecord) && ActiveRecord.const_defined?(:Base)
+  require 'spec/rails/matchers/change'
+end
 require 'spec/rails/matchers/have_text'
 require 'spec/rails/matchers/include_text'
-require 'spec/rails/matchers/redirect_to'
-require 'spec/rails/matchers/render_template'
+if Object.const_defined?(:ActionController) && ActionController.const_defined?(:Base)
+  require 'spec/rails/matchers/redirect_to'
+  require 'spec/rails/matchers/render_template'
+end
 
 module Spec
   module Rails

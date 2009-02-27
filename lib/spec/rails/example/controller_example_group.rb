@@ -80,7 +80,7 @@ module Spec
 
         before(:each) do
           # Some Rails apps explicitly disable ActionMailer in environment.rb
-          if defined?(ActionMailer)
+          if Object.const_defined?(:ActionMailer)
             @deliveries = []
             ActionMailer::Base.deliveries = @deliveries
           end

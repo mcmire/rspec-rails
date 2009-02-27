@@ -1,6 +1,7 @@
 require 'spec/interop/test'
 
-if ActionView::Base.respond_to?(:cache_template_extension)
+if Object.const_defined?(:ActionView) && ActionView.const_defined?(:Base) &&
+ActionView::Base.respond_to?(:cache_template_extensions)
   ActionView::Base.cache_template_extensions = false
 end
 

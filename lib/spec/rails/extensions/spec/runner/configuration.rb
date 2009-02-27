@@ -1,5 +1,10 @@
 require 'spec/runner/configuration'
-require 'test_help'
+begin
+  require 'test_help'
+rescue MissingSourceFile, NameError
+  # probably ApplicationController hasn't been loaded yet,
+  # but that probably means we're jimmy rigging this
+end
 
 begin
 module Spec
